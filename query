@@ -1,9 +1,17 @@
-# get the emloyees details who not allocate
-SELECT * FROM employee WHERE status = 'Not allocate'
-
-# Allocate employee to a project
-UPDATE employee SET status = 'projectid' WHERE employeeid = 'employeeid';
+# create Table
+CREATE TABLE table_name (
+    employeeid varchar(10) NOT NULL PRIMARY KEY,
+    employeename varchar(100),
+    address varchar(200),
+    status varchar(20)
+); 
 
 # Insert query
 INSERT INTO employee (employeeid, employeename, address, status)
-VALUES ('E/001','nirojan','jaffna','Not allocate'); 
+VALUES ('E/001','nirojan','jaffna','nun'); 
+
+# get the emloyees details who not allocate
+SELECT * FROM employee WHERE status = 'Not nun'
+
+# Allocate employee to a project
+UPDATE employee SET status = 'projectid' WHERE employeeid = 'employeeid';
