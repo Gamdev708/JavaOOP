@@ -1,0 +1,9 @@
+# get the emloyees details who not allocate
+SELECT * FROM employee WHERE status = 'Not allocate'
+
+# Allocate employee to a project
+UPDATE employee SET status = 'projectid' WHERE employeeid = 'employeeid';
+
+# Insert query
+INSERT INTO employee (employeeid, employeename, address, status)
+VALUES ('E/001','nirojan','jaffna','Not allocate'); 
