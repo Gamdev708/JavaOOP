@@ -1,0 +1,5 @@
+git init
+git add .
+git commit -m "message for the commit"
+git remote add origin https://github.com/Gamdev708/OOP-Project
+git push -f origin master
