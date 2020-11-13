@@ -86,6 +86,62 @@ public class Employer implements function{
             return false;
         }
     }
+
+    public String geteID() {
+        return eID;
+    }
+
+    public void seteID(String eID) {
+        this.eID = eID;
+    }
+
+    public String getNIC() {
+        return NIC;
+    }
+
+    public void setNIC(String NIC) {
+        this.NIC = NIC;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAdres() {
+        return Adres;
+    }
+
+    public void setAdres(String Adres) {
+        this.Adres = Adres;
+    }
+
+    public String getTel() {
+        return Tel;
+    }
+
+    public void setTel(String Tel) {
+        this.Tel = Tel;
+    }
+
+    public String getJob() {
+        return Job;
+    }
+
+    public void setJob(String Job) {
+        this.Job = Job;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
     
     
 
