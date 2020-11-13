@@ -17,4 +17,15 @@ public class Employee {
     public String Tel;
     public String Job;
 
+    public Employee(String eID, String NIC, String name, String Adres, String Tel, String Job) {
+        this.eID = eID;
+        this.NIC = NIC;
+        this.name = name;
+        this.Adres = Adres;
+        this.Tel = Tel;
+        this.Job = Job;
+    }
+    
+    
+
 }
