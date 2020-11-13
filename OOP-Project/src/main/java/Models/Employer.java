@@ -5,20 +5,24 @@
  */
 package Models;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Pankajan05
  */
-public class Employee implements function{
+public class Employer implements function{
     private String eID;
     private String NIC;
     private String name;
     private String Adres;
     private String Tel;
     private String Job;
-    private Database database;
+    private Database database = new Database();
 
-    public Employee(String eID, String NIC, String name, String Adres, String Tel, String Job) {
+    public Employer(String eID, String NIC, String name, String Adres, String Tel, String Job) {
         this.eID = eID;
         this.NIC = NIC;
         this.name = name;
@@ -27,8 +31,9 @@ public class Employee implements function{
         this.Job = Job;
     }
 
+    
     @Override
-    public boolean add() {
+    public boolean add(){
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO employee (EID,NIC,Name,Address,Tel,J_Allocate) values('");
         sql.append(eID).append("','");
@@ -38,9 +43,14 @@ public class Employee implements function{
         sql.append(Tel).append("','");
         sql.append(Job).append("')");
         
-        database
+        try {
+            database.execute(sql);
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
      
-         return true;
+         
     }
 
     @Override

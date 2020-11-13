@@ -6,6 +6,7 @@
 package FrontEnd;
 
 import Models.DBConnect;
+import Models.Employer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +22,7 @@ public class Employee extends javax.swing.JInternalFrame {
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
+    Employer emp;
 
     /**
      * Creates new form Employee
@@ -329,21 +331,13 @@ public class Employee extends javax.swing.JInternalFrame {
         String Tel = telbox.getText();
         String Job = jobbox.getSelectedItem().toString();
 
-        StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO employee (EID,NIC,Name,Address,Tel,J_Allocate) values('");
-        sql.append(eID).append("','");
-        sql.append(NIC).append("','");
-        sql.append(name).append("','");
-        sql.append(Adres).append("','");
-        sql.append(Tel).append("','");
-        sql.append(Job).append("')");
-
+        
+        this.emp = new Employer(eID, NIC, name, Adres, Tel, Job);
         // TODO add your handli;ng code here:
-        try {
-            pstmt = conn.prepareStatement(sql.toString());
-            pstmt.execute();
+        if(emp.add()){
             tableload();
-        } catch (Exception e) {
+        } else{
+            System.out.print("Error");
         } // TODO add your handling code here:
 
         // TODO add your handling code here:
