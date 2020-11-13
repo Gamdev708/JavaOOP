@@ -5,10 +5,26 @@
  */
 package Models;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author Pankajan05
  */
 public class Database {
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
     
+    public Database(){
+        this.conn = DBConnect.connection();
+    }
+    
+    public void execute(StringBuilder sql) throws SQLException{
+          pstmt = conn.prepareStatement(sql.toString());
+          pstmt.execute();
+    }
 }
