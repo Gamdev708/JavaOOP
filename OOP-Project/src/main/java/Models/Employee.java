@@ -9,7 +9,7 @@ package Models;
  *
  * @author Pankajan05
  */
-public class Employee {
+public class Employee implements function{
     public String eID;
     public String NIC;
     public String name;
@@ -24,6 +24,21 @@ public class Employee {
         this.Adres = Adres;
         this.Tel = Tel;
         this.Job = Job;
+    }
+
+    @Override
+    public boolean add() {
+         return true;
+    }
+
+    @Override
+    public boolean update() {
+        return true;
+    }
+
+    @Override
+    public boolean delete() {
+         return true;
     }
     
     
