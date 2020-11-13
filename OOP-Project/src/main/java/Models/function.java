@@ -10,5 +10,7 @@ package Models;
  * @author Pankajan05
  */
 public interface function {
-    
+    public boolean add();
+    public boolean update();
+    public boolean delete();
 }
