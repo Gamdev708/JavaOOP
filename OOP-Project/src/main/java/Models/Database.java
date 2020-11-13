@@ -27,4 +27,9 @@ public class Database {
           pstmt = conn.prepareStatement(sql.toString());
           pstmt.execute();
     }
+    
+    public void execute(String sql) throws SQLException{
+          pstmt = conn.prepareStatement(sql.toString());
+          pstmt.execute();
+    }
 }

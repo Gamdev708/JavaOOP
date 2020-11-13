@@ -356,14 +356,13 @@ public class Employee extends javax.swing.JInternalFrame {
             int y = JOptionPane.showConfirmDialog(null, "Are you sure?");
             if (y == 0) {
 
-                String eid = empID.getText();
+                this.emp = new Employer(empID.getText());
 
-                String sql = "DELETE FROM employee WHERE EID='" + eid + "'";
-                try {
-                    pstmt = conn.prepareStatement(sql);
-                    pstmt.execute();
+                
+                if(this.emp.delete()) {
                     tableload();
-                } catch (Exception e) {
+                } else {
+                    System.out.print("Error");
                 }
             }
 
@@ -374,19 +373,13 @@ public class Employee extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int z = jTable1.getSelectedRow();
-        String eid = jTable1.getValueAt(z, 0).toString();
-        String nic = jTable1.getValueAt(z, 1).toString();
-        String name = jTable1.getValueAt(z, 2).toString();
-        String Ads = jTable1.getValueAt(z, 3).toString();
-        String tel = jTable1.getValueAt(z, 4).toString();
-        String JA = jTable1.getValueAt(z, 5).toString();
 
-        empID.setText(eid);
-        NIcbox.setText(nic);
-        Namebox.setText(name);
-        Addressbox.setText(Ads);
-        telbox.setText(tel);
-        jobbox.setSelectedItem(JA);
+        empID.setText(jTable1.getValueAt(z, 0).toString());
+        NIcbox.setText(jTable1.getValueAt(z, 1).toString());
+        Namebox.setText(jTable1.getValueAt(z, 2).toString());
+        Addressbox.setText(jTable1.getValueAt(z, 3).toString());
+        telbox.setText(jTable1.getValueAt(z, 4).toString());
+        jobbox.setSelectedItem(jTable1.getValueAt(z, 5).toString());
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 

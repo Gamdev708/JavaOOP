@@ -31,6 +31,9 @@ public class Employer implements function{
         this.Job = Job;
     }
 
+    public Employer(String eID){
+        this.eID = eID;
+    }
     
     @Override
     public boolean add(){
@@ -74,7 +77,14 @@ public class Employer implements function{
 
     @Override
     public boolean delete() {
-         return true;
+        String sql = "DELETE FROM employee WHERE EID='" + this.eID + "'";
+        
+        try {
+            database.execute(sql);
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
     }
     
     
