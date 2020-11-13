@@ -55,7 +55,21 @@ public class Employer implements function{
 
     @Override
     public boolean update() {
-        return true;
+           StringBuilder sql2 = new StringBuilder();
+
+            sql2.append("UPDATE employee SET NIC='").append(NIC);
+            sql2.append("',Name='").append(name);
+            sql2.append("',Address='").append(Adres);
+            sql2.append("',Tel='").append(Tel);
+            sql2.append("',J_Allocate='").append(Job);
+            sql2.append("' WHERE EID='").append(eID).append("'");
+            
+        try {
+            database.execute(sql2);
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
     }
 
     @Override

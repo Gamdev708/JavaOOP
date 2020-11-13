@@ -323,16 +323,8 @@ public class Employee extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_NameboxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        String eID = empID.getText();
-        String NIC = NIcbox.getText();
-        String name = Namebox.getText();
-        String Adres = Addressbox.getText();
-        String Tel = telbox.getText();
-        String Job = jobbox.getSelectedItem().toString();
-
-        
-        this.emp = new Employer(eID, NIC, name, Adres, Tel, Job);
+ 
+        this.emp = new Employer(empID.getText(), NIcbox.getText(), Namebox.getText(),  Addressbox.getText(), telbox.getText(), jobbox.getSelectedItem().toString());
         // TODO add your handli;ng code here:
         if(emp.add()){
             tableload();
@@ -347,27 +339,12 @@ public class Employee extends javax.swing.JInternalFrame {
         int O = JOptionPane.showConfirmDialog(null, "Are you sure?");
 
         if (O == 0) {
-            String eID = empID.getText();
-            String NIC = NIcbox.getText();
-            String name = Namebox.getText();
-            String Adres = Addressbox.getText();
-            String Tel = telbox.getText();
-            String Job = jobbox.getSelectedItem().toString();
+           this.emp = new Employer(empID.getText(), NIcbox.getText(), Namebox.getText(),  Addressbox.getText(), telbox.getText(), jobbox.getSelectedItem().toString());
 
-            StringBuilder sql2 = new StringBuilder();
-
-            sql2.append("UPDATE employee SET NIC='").append(NIC);
-            sql2.append("',Name='").append(name);
-            sql2.append("',Address='").append(Adres);
-            sql2.append("',Tel='").append(Tel);
-            sql2.append("',J_Allocate='").append(Job);
-            sql2.append("' WHERE EID='").append(eID).append("'");
-
-            try {
-                pstmt = conn.prepareStatement(sql2.toString());
-                pstmt.execute();
+            if(emp.update()) {
                 tableload();
-            } catch (Exception e) {
+            } else{
+                System.out.print("error");
             }
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
