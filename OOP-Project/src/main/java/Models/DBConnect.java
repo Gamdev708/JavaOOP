@@ -13,9 +13,9 @@ import java.sql.*;
  */
 public class DBConnect {
     
-    private static final String url="jdbc:mysql://localhost:3308/rustyrepaire";
-    private static final String user="root";
-    private static final String password="";
+    private static final String url="jdbc:mysql://localhost:3308/rustyrepairdb";
+    private static final String user="Breaker";
+    private static final String password="C456123";
     
     public static void Login(String user,String Password)
     {

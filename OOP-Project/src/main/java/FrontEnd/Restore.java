@@ -6,6 +6,7 @@
 package FrontEnd;
 
 import Models.DBConnect;
+import Models.MailSend;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +31,28 @@ public class Restore extends javax.swing.JInternalFrame {
         initComponents();
         conn = DBConnect.connection();
         tableload();
+    }
+    
+    private void emailDetails() {
+
+        StringBuilder sql = new StringBuilder();
+        String word = "Completed";
+        sql.append("SELECT customer.email FROM customer,repairjobs ");
+        sql.append("WHERE repairjobs.customer=customer.nic AND repairjobs.status='");
+        sql.append(word).append("'");
+        System.out.println(sql);
+        try {
+            pstmt = conn.prepareStatement(sql.toString());
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String o = rs.getString(1);
+                System.out.println(o);
+                MailSend.Mail(o);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void tableload() {
@@ -167,7 +190,7 @@ public class Restore extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Search Filter");
 
-        statebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a state", "Pending", "Completed", "In-Progress" }));
+        statebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a state", "Pending", "Completed", "In-Progress", "Finished" }));
 
         jLabel11.setText("Id");
 
@@ -430,6 +453,7 @@ public class Restore extends javax.swing.JInternalFrame {
                 pstmt = conn.prepareStatement(sql2.toString());
                 pstmt.execute();
                 tableload();
+                emailDetails();
             } catch (Exception e) {
             }
         }    // TODO add your handling code here: //vehicalrestore 
