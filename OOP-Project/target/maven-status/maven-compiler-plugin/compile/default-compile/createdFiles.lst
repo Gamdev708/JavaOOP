@@ -11,8 +11,10 @@ FrontEnd\Repair$5.class
 FrontEnd\Restore$5.class
 FrontEnd\SpareParts.class
 FrontEnd\Employee$5.class
+DatabaseLayer\Database.class
 FrontEnd\Customer$6.class
 FrontEnd\SpareParts$1.class
+Models\function.class
 FrontEnd\MainMenu$4.class
 FrontEnd\Employee$1.class
 FrontEnd\SpareParts$5.class
@@ -34,7 +36,9 @@ FrontEnd\Customer.class
 FrontEnd\Restore$4.class
 FrontEnd\Customer$2.class
 FrontEnd\PartsSupplier$6.class
+DatabaseLayer\function.class
 FrontEnd\Employee$7.class
+Models\Database.class
 FrontEnd\MainMenu$3.class
 FrontEnd\Repair$4.class
 FrontEnd\Customer$4.class
@@ -48,6 +52,7 @@ FrontEnd\Login$2.class
 FrontEnd\Restore$3.class
 FrontEnd\Customer$1.class
 FrontEnd\PartsSupplier$5.class
+DatabaseLayer\Employer.class
 FrontEnd\Customer$3.class
 FrontEnd\Repair$8.class
 FrontEnd\MainMenu.class
@@ -65,3 +70,4 @@ FrontEnd\Employee$6.class
 FrontEnd\Employee.class
 FrontEnd\PartsSupplier$1.class
 FrontEnd\MainMenu$8.class
+Models\Employer.class
