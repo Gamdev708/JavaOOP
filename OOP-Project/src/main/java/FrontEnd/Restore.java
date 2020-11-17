@@ -516,8 +516,8 @@ int q = jTable1.getSelectedRow();
         String Cid = sname.getText();
         String mech = smech.getText();
 
-        String sqlvr = "SELECT * FROM vehicalrestore WHERE vj_id LIKE '%" + VRID + "%'";
-        String sqln = "SELECT * FROM vehicalrestore WHERE vj_job_name LIKE '%" + Name + "%'";
+        String sqlvr = "SELECT * FROM vehicalrestore WHERE vr_id LIKE '%" + VRID + "%'";
+        String sqln = "SELECT * FROM vehicalrestore WHERE vr_job_name LIKE '%" + Name + "%'";
         String sqlc = "SELECT * FROM vehicalrestore WHERE customer LIKE '%" + Cid + "%'";
         String sqlm = "SELECT * FROM vehicalrestore WHERE e_id LIKE '%" + mech + "%'";
 

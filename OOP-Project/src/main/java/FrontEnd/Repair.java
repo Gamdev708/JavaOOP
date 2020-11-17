@@ -538,7 +538,7 @@ public class Repair extends javax.swing.JInternalFrame {
 
             String rjid = Repairbox.getText();
 
-            String sql = "DELETE FROM repairjobs WHERE vr_id='" + rjid + "'";
+            String sql = "DELETE FROM repairjobs WHERE rj_id='" + rjid + "'";
             try {
                 pstmt = conn.prepareStatement(sql);
                 pstmt.execute();
