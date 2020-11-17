@@ -6,7 +6,6 @@
 package FrontEnd;
 
 import Models.DBConnect;
-import Models.MailSend;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,30 +30,6 @@ public class Repair extends javax.swing.JInternalFrame {
         initComponents();
         conn = DBConnect.connection();
         tableload();
-        
-
-    }
-
-    private void emailDetails() {
-
-        StringBuilder sql = new StringBuilder();
-        String word = "Completed";
-        sql.append("SELECT customer.email FROM customer,repairjobs ");
-        sql.append("WHERE repairjobs.customer=customer.nic AND repairjobs.status='");
-        sql.append(word).append("'");
-        System.out.println(sql);
-        try {
-            pstmt = conn.prepareStatement(sql.toString());
-            rs = pstmt.executeQuery();
-            if (rs.next()) {
-                String o = rs.getString(1);
-                System.out.println(o);
-                MailSend.Mail(o);
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void tableload() {
@@ -216,7 +191,7 @@ public class Repair extends javax.swing.JInternalFrame {
 
         sm.setText("jTextField13");
 
-        statebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a State", "Pending", "In-Progress", "Completed", "Finished" }));
+        statebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a State", "Pending", "In-Progress", "Completed" }));
         statebox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 stateboxActionPerformed(evt);
@@ -252,12 +227,6 @@ public class Repair extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(sdatebox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -293,14 +262,24 @@ public class Repair extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addGap(43, 43, 43)
-                                        .addComponent(statebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(statebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(sdatebox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(23, 23, 23)
                                         .addComponent(jButton3))
                                     .addComponent(jLabel16))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel10)
@@ -469,9 +448,9 @@ public class Repair extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_stateboxActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-
+        
         int q = jTable1.getSelectedRow();
-
+        
         String rpid = jTable1.getValueAt(q, 0).toString();
         String rpname = jTable1.getValueAt(q, 1).toString();
         String cid = jTable1.getValueAt(q, 2).toString();
@@ -525,7 +504,6 @@ public class Repair extends javax.swing.JInternalFrame {
                 pstmt = conn.prepareStatement(sql2.toString());
                 pstmt.execute();
                 tableload();
-                emailDetails();
             } catch (Exception e) {
             }
         }         // TODO add your handling code here:
@@ -647,9 +625,4 @@ public class Repair extends javax.swing.JInternalFrame {
     private javax.swing.JButton sstate;
     private javax.swing.JComboBox<String> statebox;
     // End of variables declaration//GEN-END:variables
-
-    
-    private void MailSend(String o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

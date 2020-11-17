@@ -5,8 +5,8 @@
  */
 package FrontEnd;
 
-import DatabaseLayer.Employer;
 import Models.DBConnect;
+import Models.Employer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +22,7 @@ public class Employee extends javax.swing.JInternalFrame {
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
+    Employer emp;
 
     /**
      * Creates new form Employee
@@ -322,20 +323,13 @@ public class Employee extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_NameboxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        String eID = empID.getText();
-        String NIC = NIcbox.getText();
-        String name = Namebox.getText();
-        String Adres = Addressbox.getText();
-        String Tel = telbox.getText();
-        String Job = jobbox.getSelectedItem().toString();
-        Employer em = new Employer(eID, NIC, name, Adres, Tel, Job);
-
+ 
+        this.emp = new Employer(empID.getText(), NIcbox.getText(), Namebox.getText(),  Addressbox.getText(), telbox.getText(), jobbox.getSelectedItem().toString());
         // TODO add your handli;ng code here:
-        try {
-            em.add();
+        if(emp.add()){
             tableload();
-        } catch (Exception e) {
+        } else{
+            System.out.print("Error");
         } // TODO add your handling code here:
 
         // TODO add your handling code here:
@@ -345,20 +339,12 @@ public class Employee extends javax.swing.JInternalFrame {
         int O = JOptionPane.showConfirmDialog(null, "Are you sure?");
 
         if (O == 0) {
-            String eID = empID.getText();
-            String NIC = NIcbox.getText();
-            String name = Namebox.getText();
-            String Adres = Addressbox.getText();
-            String Tel = telbox.getText();
-            String Job = jobbox.getSelectedItem().toString();
+           this.emp = new Employer(empID.getText(), NIcbox.getText(), Namebox.getText(),  Addressbox.getText(), telbox.getText(), jobbox.getSelectedItem().toString());
 
-            Employer em = new Employer(eID, NIC, name, Adres, Tel, Job);
-
-            // TODO add your handli;ng code here:
-            try {
-                em.update();
+            if(emp.update()) {
                 tableload();
-            } catch (Exception e) {
+            } else{
+                System.out.print("error");
             }
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -370,15 +356,13 @@ public class Employee extends javax.swing.JInternalFrame {
             int y = JOptionPane.showConfirmDialog(null, "Are you sure?");
             if (y == 0) {
 
-                String eid = empID.getText();
+                this.emp = new Employer(empID.getText());
 
-                Employer em = new Employer(eid);
-
-                // TODO add your handli;ng code here:
-                try {
-                    em.delete();
+                
+                if(this.emp.delete()) {
                     tableload();
-                } catch (Exception e) {
+                } else {
+                    System.out.print("Error");
                 }
             }
 
@@ -389,19 +373,13 @@ public class Employee extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int z = jTable1.getSelectedRow();
-        String eid = jTable1.getValueAt(z, 0).toString();
-        String nic = jTable1.getValueAt(z, 1).toString();
-        String name = jTable1.getValueAt(z, 2).toString();
-        String Ads = jTable1.getValueAt(z, 3).toString();
-        String tel = jTable1.getValueAt(z, 4).toString();
-        String JA = jTable1.getValueAt(z, 5).toString();
 
-        empID.setText(eid);
-        NIcbox.setText(nic);
-        Namebox.setText(name);
-        Addressbox.setText(Ads);
-        telbox.setText(tel);
-        jobbox.setSelectedItem(JA);
+        empID.setText(jTable1.getValueAt(z, 0).toString());
+        NIcbox.setText(jTable1.getValueAt(z, 1).toString());
+        Namebox.setText(jTable1.getValueAt(z, 2).toString());
+        Addressbox.setText(jTable1.getValueAt(z, 3).toString());
+        telbox.setText(jTable1.getValueAt(z, 4).toString());
+        jobbox.setSelectedItem(jTable1.getValueAt(z, 5).toString());
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
