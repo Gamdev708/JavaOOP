@@ -156,6 +156,18 @@ public class Report extends javax.swing.JPanel {
         } catch (Exception e) {
         }
         
+        String sql1 = "SELECT cost,quantity FROM spareparts";
+        try {
+            pstmt = conn.prepareStatement(sql1);
+            rs = pstmt.executeQuery();
+            float total = (float) 0.0;
+            while (rs.next()) {
+                total += rs.getFloat("cost") * rs.getFloat("quantity");
+            }
+            sparepart += "" + total + " Rs";
+        } catch (Exception e) {
+        }
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
