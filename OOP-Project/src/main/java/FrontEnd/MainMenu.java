@@ -194,7 +194,9 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        jDesktopPane2.removeAll();
+        Report re = new Report();
+        jDesktopPane2.add(re).setVisible(true); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
