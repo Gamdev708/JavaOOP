@@ -168,7 +168,26 @@ public class Report extends javax.swing.JPanel {
         } catch (Exception e) {
         }
         
+        String sql2 = "SELECT cost,sales FROM vehicalrestore";
+        try {
+
+            pstmt = conn.prepareStatement(sql2);
+            rs = pstmt.executeQuery();
+            float cost = (float) 0.0;
+            float sales  = (float) 0.0;
+            while (rs.next()) {
+                cost += rs.getFloat("cost");
+                sales += rs.getFloat("sales");
+            }
+            income += sales - cost; 
+            restoration += "<html> Cost : " + cost + " Rs<br/> Sales : "+ sales + " Rs<br/> Profit : " + (sales - cost) +"Rs</html>";
+        } catch (Exception e) {
+        }
         
+        jLabel9.setText(sparepart);
+        jLabel7.setText(repair);
+        jLabel8.setText(restoration);
+        jLabel11.setText(""+income+" Rs");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
