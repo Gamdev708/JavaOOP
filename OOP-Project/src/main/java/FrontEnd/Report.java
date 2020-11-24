@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author Pankajan05
+ * @author Gowsikan
  */
 public class Report extends javax.swing.JPanel {
     
@@ -184,9 +184,11 @@ public class Report extends javax.swing.JPanel {
         } catch (Exception e) {
         }
         
+        //update the labels
         jLabel9.setText(sparepart);
         jLabel7.setText(repair);
         jLabel8.setText(restoration);
+        //update the total income
         jLabel11.setText(""+income+" Rs");
     }//GEN-LAST:event_jButton1ActionPerformed
 
