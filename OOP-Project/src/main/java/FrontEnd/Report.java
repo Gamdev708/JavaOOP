@@ -139,7 +139,24 @@ public class Report extends javax.swing.JPanel {
        String repair = "";
        String restoration = "";
        String sparepart = "";
-       
+       float income = (float) 0.0;
+        String sql = "SELECT cost,sales FROM repairjobs";
+        try {
+
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            float cost = (float) 0.0;
+            float sales  = (float) 0.0;
+            while (rs.next()) {
+                cost += rs.getFloat("cost");
+                sales += rs.getFloat("sales");
+            }
+            income += sales - cost;
+            repair += "<html> Cost : " + cost + " Rs<br/> Sales : "+ sales + " Rs<br/> Profit : " + (sales - cost) +"Rs</html>";
+        } catch (Exception e) {
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
