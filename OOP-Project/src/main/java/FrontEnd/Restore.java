@@ -16,7 +16,7 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Vision-PC
+ * @author S.D.P.M.Siriwardana
  */
 public class Restore extends javax.swing.JInternalFrame {
 
@@ -32,12 +32,13 @@ public class Restore extends javax.swing.JInternalFrame {
         conn = DBConnect.connection();
         tableload();
     }
-    
+
+
     private void emailDetails() {
 
         StringBuilder sql = new StringBuilder();
         String word = "Completed";
-        sql.append("SELECT customer.email FROM customer,repairjobs ");
+        sql.append("SELECT customer.email,customer.cus_name FROM customer,repairjobs ");
         sql.append("WHERE repairjobs.customer=customer.nic AND repairjobs.status='");
         sql.append(word).append("'");
         System.out.println(sql);
@@ -46,12 +47,14 @@ public class Restore extends javax.swing.JInternalFrame {
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 String o = rs.getString(1);
-                System.out.println(o);
-                MailSend.Mail(o);
+                String n=rs.getString(2);
+                System.out.println(o+" "+ n);
+                MailSend.Mail(o,n);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -61,8 +64,9 @@ public class Restore extends javax.swing.JInternalFrame {
 
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
-            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));           
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -128,26 +132,17 @@ public class Restore extends javax.swing.JInternalFrame {
 
         jLabel9.setText("e_date");
 
-        VRbox.setText("jTextField1");
-
-        namebox.setText("jTextField2");
         namebox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameboxActionPerformed(evt);
             }
         });
 
-        cbox.setText("jTextField3");
-
-        mbox.setText("jTextField4");
-
-        costbox.setText("jTextField5");
-
-        salesbox.setText("jTextField6");
-
-        sdatebox.setText("jTextField8");
-
-        edatebox.setText("jTextField9");
+        sdatebox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sdateboxActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -191,20 +186,25 @@ public class Restore extends javax.swing.JInternalFrame {
         jLabel10.setText("Search Filter");
 
         statebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a state", "Pending", "Completed", "In-Progress", "Finished" }));
+        statebox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stateboxActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Id");
 
         jLabel12.setText("Name");
 
-        jLabel13.setText("mach");
+        jLabel13.setText("Mechanic");
 
-        jLabel14.setText("state");
+        jLabel14.setText("State");
 
-        svrid.setText("jTextField7");
-
-        sname.setText("jTextField10");
-
-        smech.setText("jTextField11");
+        svrid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                svridActionPerformed(evt);
+            }
+        });
 
         sstate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a state", "Pending", "Completed", "In-Progress" }));
 
@@ -238,9 +238,10 @@ public class Restore extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel9))
                                 .addGap(61, 61, 61)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sdatebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(edatebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(statebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(statebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(edatebox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                        .addComponent(sdatebox, javax.swing.GroupLayout.Alignment.LEADING))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
@@ -250,31 +251,21 @@ public class Restore extends javax.swing.JInternalFrame {
                         .addComponent(jButton3))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(salesbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(costbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(mbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(namebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(VRbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(salesbox, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                            .addComponent(costbox, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mbox, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbox, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(namebox, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(VRbox, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -286,30 +277,29 @@ public class Restore extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel10))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(52, 52, 52)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
                                     .addComponent(jLabel12))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(smech, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(svrid, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(99, 99, 99)
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton5))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(sname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton4))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(svrid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(203, 203, 203)
-                                            .addComponent(sstate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(sstate, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(sname, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(131, 131, 131)
+                                        .addComponent(jButton4))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(smech, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton5)))))
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(249, 249, 249)
                 .addComponent(jLabel11)
-                .addGap(255, 255, 255)
-                .addComponent(jLabel14)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -319,7 +309,7 @@ public class Restore extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel14)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(svrid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sstate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -328,11 +318,10 @@ public class Restore extends javax.swing.JInternalFrame {
                     .addComponent(sname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(smech, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton5)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(smech, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5)
+                    .addComponent(jLabel13))
                 .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -378,7 +367,7 @@ public class Restore extends javax.swing.JInternalFrame {
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -414,7 +403,7 @@ public class Restore extends javax.swing.JInternalFrame {
             pstmt.execute();
             tableload();
         } catch (SQLException e) {
-            System.err.println(e);
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -455,6 +444,7 @@ public class Restore extends javax.swing.JInternalFrame {
                 tableload();
                 emailDetails();
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }    // TODO add your handling code here: //vehicalrestore 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -471,13 +461,14 @@ public class Restore extends javax.swing.JInternalFrame {
                 pstmt.execute();
                 tableload();
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-int q = jTable1.getSelectedRow();
-        
+        int q = jTable1.getSelectedRow();
+
         String rpid = jTable1.getValueAt(q, 0).toString();
         String rpname = jTable1.getValueAt(q, 1).toString();
         String cid = jTable1.getValueAt(q, 2).toString();
@@ -500,13 +491,14 @@ int q = jTable1.getSelectedRow();
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    String state = sstate.getSelectedItem().toString();
+        String state = sstate.getSelectedItem().toString();
         String sqlj = "SELECT * FROM vehicalrestore WHERE status='" + state + "'";
         try {
             pstmt = conn.prepareStatement(sqlj);
             rs = pstmt.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }           // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -527,6 +519,7 @@ int q = jTable1.getSelectedRow();
                 rs = pstmt.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         } else if (Name != null) {
             try {
@@ -534,6 +527,7 @@ int q = jTable1.getSelectedRow();
                 rs = pstmt.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         } else if (Cid != null) {
             try {
@@ -541,6 +535,7 @@ int q = jTable1.getSelectedRow();
                 rs = pstmt.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         } else if (mech != null) {
             try {
@@ -548,9 +543,22 @@ int q = jTable1.getSelectedRow();
                 rs = pstmt.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }// TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void sdateboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sdateboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sdateboxActionPerformed
+
+    private void svridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_svridActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_svridActionPerformed
+
+    private void stateboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stateboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stateboxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

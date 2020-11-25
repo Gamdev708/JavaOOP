@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Pankajan05
+ * @author S.Nirojan
  */
 public class Employer implements function{
     private String eID;

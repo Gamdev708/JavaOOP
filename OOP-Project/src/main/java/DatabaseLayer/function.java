@@ -7,7 +7,7 @@ package DatabaseLayer;
 
 /**
  *
- * @author Pankajan05
+ * @author S.Nirojan
  */
 public interface function {
     public boolean add();

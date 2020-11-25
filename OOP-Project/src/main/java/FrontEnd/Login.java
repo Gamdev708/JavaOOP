@@ -9,10 +9,46 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Vision-PC
+ * @author S.D.P.M.Siriwardana
  */
 public class Login extends javax.swing.JFrame {
 
+    private String user="Breaker";
+    private String euser="eplo";
+
+    public String getEuser() {
+        return euser;
+    }
+
+    public void setEuser(String euser) {
+        this.euser = euser;
+    }
+
+    public String getEpas() {
+        return epas;
+    }
+
+    public void setEpas(String epas) {
+        this.epas = epas;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPas() {
+        return pas;
+    }
+
+    public void setPas(String pas) {
+        this.pas = pas;
+    }
+    private String pas="C456123";
+    private String epas="789456";
     /**
      * Creates new form Login
      */
@@ -114,21 +150,22 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        String user=usern.getText();
-        String pas=passw.getText();
-        
-       
-        if(user.equals("Breaker") & pas.equals("C456123"))
-        {
-        MainMenu m=new MainMenu();
-        m.setVisible(true);
-        this.dispose();
-        }else
-        {
+
+        String username = usern.getText();
+        String password = passw.getText();
+
+        if (username.equals(user) & password.equals(pas)) {
+            AdMainMenu m = new AdMainMenu();
+            m.setVisible(true);
+            this.dispose();
+        } else if (username.equals(euser) & password.equals(epas)) {
+            EmpMainMenu em = new EmpMainMenu();
+            em.setVisible(true);
+            this.dispose();
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Invalid Username or Password");
         }
-        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

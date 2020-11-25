@@ -6,6 +6,7 @@
 package FrontEnd;
 
 import Models.DBConnect;
+import Models.MailSend;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Vision-PC
+ * @author M.S.Y.P.Sennayake
  */
 public class SpareParts extends javax.swing.JInternalFrame {
 
@@ -31,15 +32,42 @@ public class SpareParts extends javax.swing.JInternalFrame {
         conn = DBConnect.connection();
         tableload();
     }
+    
+    private void emailDetails() {
+
+        StringBuilder sql = new StringBuilder();
+        String word = "0";
+        sql.append("SELECT supplier.email,supplier.sup_name,spareparts.partname FROM spareparts,supplier ");
+        sql.append("WHERE spareparts.supplierid=supplier.psid AND spareparts.quantity=");
+        sql.append(word).append("");
+        System.out.println(sql);
+        try {
+            pstmt = conn.prepareStatement(sql.toString());
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String o = rs.getString(1);
+                String n=rs.getString(2);
+                String p=rs.getString(3);
+                System.out.println(o +" "+n+" "+p);
+                MailSend.SuppMail(o,n,p);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
 
     private void tableload() {
-        String sql = "SELECT * FROM spareparts";
+        StringBuffer sql =new StringBuffer();
+        sql.append("SELECT * FROM spareparts");
         try {
 
-            pstmt = conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql.toString());
             rs = pstmt.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -84,15 +112,13 @@ public class SpareParts extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Quantity");
 
-        namebox.setText("jTextField2");
-
-        costbox.setText("jTextField3");
-
-        quantitybox.setText("jTextField4");
+        namebox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameboxActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Supplier");
-
-        Supplierbox.setText("jTextField5");
 
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -141,11 +167,11 @@ public class SpareParts extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Supplier");
 
-        Sid.setText("jTextField6");
-
-        sname.setText("jTextField7");
-
-        ssup.setText("jTextField8");
+        ssup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ssupActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Search");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +179,8 @@ public class SpareParts extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
+
+        SPID.setText("00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,30 +203,30 @@ public class SpareParts extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(14, 14, 14)
+                                            .addComponent(costbox, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(quantitybox, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Supplierbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(4, 4, 4)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(costbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(namebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(quantitybox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(24, 24, 24)
-                                        .addComponent(SPID, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addComponent(SPID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(namebox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Supplierbox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jButton3)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(78, 78, 78)
+                                .addGap(88, 88, 88)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addGroup(layout.createSequentialGroup()
@@ -206,17 +234,17 @@ public class SpareParts extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel6)
                                             .addComponent(jLabel8))
                                         .addGap(30, 30, 30)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(sname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Sid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(88, 88, 88)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(sname)
+                                            .addComponent(Sid, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                                        .addGap(118, 118, 118)
                                         .addComponent(jLabel9)
                                         .addGap(30, 30, 30)
-                                        .addComponent(ssup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(ssup, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(239, 239, 239)
+                                .addGap(249, 249, 249)
                                 .addComponent(jButton4)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 105, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -225,10 +253,13 @@ public class SpareParts extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(SPID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(25, 25, 25))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(SPID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(namebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -268,10 +299,8 @@ public class SpareParts extends javax.swing.JInternalFrame {
                             .addComponent(jButton2))
                         .addGap(31, 31, 31)
                         .addComponent(jButton3)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -298,6 +327,7 @@ public class SpareParts extends javax.swing.JInternalFrame {
             tableload();
         } catch (SQLException e) {
             System.out.println(e);
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -324,6 +354,7 @@ public class SpareParts extends javax.swing.JInternalFrame {
                 pstmt.execute();
                 tableload();
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }            // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -342,6 +373,7 @@ public class SpareParts extends javax.swing.JInternalFrame {
                     pstmt.execute();
                     tableload();
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             }
 
@@ -372,14 +404,15 @@ public class SpareParts extends javax.swing.JInternalFrame {
 
         String sqlspi = "SELECT * FROM spareparts WHERE s_id LIKE '%" + Sparid + "%'";
         String sqlna = "SELECT * FROM spareparts WHERE partname LIKE '%" + name + "%'";
-
         String sqlsup = "SELECT * FROM spareparts WHERE supplierid LIKE '%" + suppliid + "%'";
+        
         if (name != null) {
             try {
                 pstmt = conn.prepareStatement(sqlna);
                 rs = pstmt.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         } else if (suppliid != null) {
             try {
@@ -387,6 +420,7 @@ public class SpareParts extends javax.swing.JInternalFrame {
                 rs = pstmt.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         } else if (Sparid != null) {
             try {
@@ -394,9 +428,18 @@ public class SpareParts extends javax.swing.JInternalFrame {
                 rs = pstmt.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }// TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void nameboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameboxActionPerformed
+
+    private void ssupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ssupActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ssupActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

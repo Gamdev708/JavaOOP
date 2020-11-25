@@ -15,7 +15,7 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Vision-PC
+ * @author S.D.P.M.Siriwardana & S.Nirojan
  */
 public class Employee extends javax.swing.JInternalFrame {
 
@@ -33,13 +33,15 @@ public class Employee extends javax.swing.JInternalFrame {
     }
 
     private void tableload() {
-        String sql = "SELECT * FROM employee";
+        StringBuffer sql =new StringBuffer();
+        sql.append("SELECT * FROM employee");
         try {
 
-            pstmt = conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql.toString());
             rs = pstmt.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -124,10 +126,6 @@ public class Employee extends javax.swing.JInternalFrame {
                 NameboxActionPerformed(evt);
             }
         });
-
-        Addressbox.setText("jTextField4");
-
-        telbox.setText("jTextField5");
 
         jLabel7.setText("Search Filter");
 
@@ -336,6 +334,7 @@ public class Employee extends javax.swing.JInternalFrame {
             em.add();
             tableload();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         } // TODO add your handling code here:
 
         // TODO add your handling code here:
@@ -379,6 +378,7 @@ public class Employee extends javax.swing.JInternalFrame {
                     em.delete();
                     tableload();
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             }
 
@@ -420,6 +420,7 @@ public class Employee extends javax.swing.JInternalFrame {
                 rs = pstmt.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         } else if (NIC != null) {
             try {
@@ -427,6 +428,7 @@ public class Employee extends javax.swing.JInternalFrame {
                 rs = pstmt.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         } else if (name != null) {
             try {
@@ -434,6 +436,7 @@ public class Employee extends javax.swing.JInternalFrame {
                 rs = pstmt.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }
 
@@ -453,6 +456,7 @@ public class Employee extends javax.swing.JInternalFrame {
             rs = pstmt.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 

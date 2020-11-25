@@ -9,7 +9,7 @@ import java.sql.*;
 
 /**
  *
- * @author Vision-PC
+ * @author S.D.P.M.Siriwardana
  */
 public class DBConnect {
     

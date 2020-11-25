@@ -32,9 +32,11 @@
                               </Group>
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="sdatebox" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="edatebox" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="statebox" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="edatebox" alignment="0" pref="84" max="32767" attributes="0"/>
+                                      <Component id="sdatebox" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -50,37 +52,22 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="salesbox" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="costbox" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="mbox" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="cbox" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="namebox" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="VRbox" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="salesbox" pref="82" max="32767" attributes="0"/>
+                          <Component id="costbox" alignment="0" max="32767" attributes="0"/>
+                          <Component id="mbox" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cbox" alignment="0" max="32767" attributes="0"/>
+                          <Component id="namebox" alignment="0" max="32767" attributes="0"/>
+                          <Component id="VRbox" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -97,28 +84,28 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="smech" min="-2" max="-2" attributes="0"/>
+                                      <Component id="svrid" min="-2" pref="60" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                                      <Component id="jLabel14" min="-2" pref="33" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="sstate" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="sname" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jButton4" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="svrid" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
-                                          <Component id="sstate" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="sname" min="-2" pref="76" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
+                                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="smech" min="-2" pref="66" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -130,8 +117,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
-              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -143,7 +128,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel14" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="svrid" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="sstate" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -154,12 +139,10 @@
                   <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="smech" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="smech" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
@@ -217,7 +200,7 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -269,47 +252,26 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="VRbox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="namebox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameboxActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="cbox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="mbox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField4"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="costbox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField5"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="salesbox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField6"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="sdatebox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField8"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sdateboxActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="edatebox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField9"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
@@ -376,6 +338,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stateboxActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -392,28 +357,22 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
-        <Property name="text" type="java.lang.String" value="mach"/>
+        <Property name="text" type="java.lang.String" value="Mechanic"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel14">
       <Properties>
-        <Property name="text" type="java.lang.String" value="state"/>
+        <Property name="text" type="java.lang.String" value="State"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="svrid">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField7"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="svridActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="sname">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField10"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="smech">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField11"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="sstate">
       <Properties>

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Pankajan05
+ * @author S.Nirojan
  */
 public class Database {
     Connection conn = null;
