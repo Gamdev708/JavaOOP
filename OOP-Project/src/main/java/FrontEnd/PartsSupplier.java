@@ -29,7 +29,7 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
     }
 
     private void tableload() {
-        StringBuffer sql =new StringBuffer();
+        StringBuffer sql = new StringBuffer();
         sql.append("SELECT * FROM supplier");  //COME BACK HERE WHEN CONECT
         try {
 
@@ -71,6 +71,8 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         supbox = new javax.swing.JTextField();
         adresbox1 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        emailbox = new javax.swing.JTextField();
 
         jLabel1.setText("Supplier ID");
 
@@ -140,6 +142,8 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setText("Email");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,14 +154,19 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +180,8 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(telbox, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                                    .addComponent(adresbox1))))
+                                    .addComponent(adresbox1)
+                                    .addComponent(emailbox))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(55, 55, 55)
@@ -246,15 +256,19 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
                         .addComponent(jButton4)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(emailbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2)
                             .addComponent(jButton1))
-                        .addGap(33, 33, 33)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
@@ -266,13 +280,15 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
         String name = namebox.getText();
         String Adres = adresbox1.getText();
         String Tel = telbox.getText();
+        String Email = emailbox.getText();
 
         StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO supplier (psid,sup_name,tele,address) values('");
+        sql.append("INSERT INTO supplier (psid,sup_name,tele,address,email) values('");
         sql.append(spid).append("','");
         sql.append(name).append("','");
         sql.append(Tel).append("','");
-        sql.append(Adres).append("')");
+        sql.append(Adres).append("','");
+        sql.append(Email).append("')");
 
         // TODO add your handli;ng code here:
         try {
@@ -289,7 +305,7 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
         String sid = jTextField5.getText();
         String tel = jTextField1.getText();
 
-        String  sqlna= "SELECT * FROM supplier WHERE cus_name LIKE '%" + name + "%'";
+        String sqlna = "SELECT * FROM supplier WHERE cus_name LIKE '%" + name + "%'";
         String sqlni = "SELECT * FROM supplier WHERE nic LIKE '%" + sid + "%'";
         String sqlt = "SELECT * FROM supplier WHERE telphone LIKE '%" + tel + "%'";
 
@@ -324,16 +340,20 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
         int x = JOptionPane.showConfirmDialog(null, "Are you sure?");
 
         if (x == 0) {
+            String spid = supbox.getText();
             String name = namebox.getText();
             String Adres = adresbox1.getText();
             String Tel = telbox.getText();
+            String Email = emailbox.getText();
 
             StringBuilder sql2 = new StringBuilder();
 
             sql2.append("UPDATE supplier SET sup_name='").append(name);
             sql2.append("',tele='").append(Tel);
             sql2.append("',address='").append(Adres);
-            sql2.append("'");
+            sql2.append("',address='").append(Adres);
+            sql2.append("' WHERE psid='");
+            sql2.append(spid).append("'");
 
             try {
                 pstmt = conn.prepareStatement(sql2.toString());
@@ -374,11 +394,13 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
         String name = jTable1.getValueAt(er, 1).toString();
         String Adress = jTable1.getValueAt(er, 2).toString();
         String telephone = jTable1.getValueAt(er, 3).toString();
+        String email = jTable1.getValueAt(er, 4).toString();
 
         supbox.setText(sid);
         namebox.setText(name);
         adresbox1.setText(Adress);
-        telbox.setText(telephone);       // TODO add your handling code here:
+        telbox.setText(telephone);
+        emailbox.setText(email);// TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -388,6 +410,7 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adresbox1;
+    private javax.swing.JTextField emailbox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -396,6 +419,7 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

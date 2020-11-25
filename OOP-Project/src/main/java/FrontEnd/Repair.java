@@ -7,7 +7,9 @@ package FrontEnd;
 
 import Models.DBConnect;
 import Models.MailSend;
+import java.awt.HeadlessException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +18,7 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author S.D.Pasindu Madusha Siriwardana
+ * @author K.Pirunthavan & S.D.Pasindu Madusha Siriwardana
  */
 public class Repair extends javax.swing.JInternalFrame {
 
@@ -39,7 +41,7 @@ public class Repair extends javax.swing.JInternalFrame {
 
         StringBuilder sql = new StringBuilder();
         String word = "Completed";
-        sql.append("SELECT customer.email,customer.cus_name FROM customer,repairjobs ");
+        sql.append("SELECT customer.email FROM customer,repairjobs ");
         sql.append("WHERE repairjobs.customer=customer.nic AND repairjobs.status='");
         sql.append(word).append("'");
         System.out.println(sql);
@@ -49,7 +51,7 @@ public class Repair extends javax.swing.JInternalFrame {
             if (rs.next()) {
                 String o = rs.getString(1);
                 String n=rs.getString(2);
-                System.out.println(o+"-"+ n);
+                System.out.println(o+" "+ n);
                 MailSend.Mail(o,n);
             }
             
@@ -134,21 +136,9 @@ public class Repair extends javax.swing.JInternalFrame {
 
         jLabel9.setText("End Date");
 
-        namebox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameboxActionPerformed(evt);
-            }
-        });
-
         meachnicbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 meachnicboxActionPerformed(evt);
-            }
-        });
-
-        sdatebox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sdateboxActionPerformed(evt);
             }
         });
 
@@ -247,37 +237,15 @@ public class Repair extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(sdatebox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22))
+                                .addComponent(sdatebox, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addGap(30, 30, 30)
                                         .addComponent(edatebox)
-                                        .addGap(17, 17, 17))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel8))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(14, 14, 14)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(Repairbox, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(namebox, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGap(15, 15, 15)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(cidbox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(meachnicbox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(costbox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(salesbox))))
-                                    .addComponent(jLabel2)
+                                        .addGap(16, 16, 16))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButton1)
                                         .addGap(18, 18, 18)
@@ -290,7 +258,36 @@ public class Repair extends javax.swing.JInternalFrame {
                                         .addGap(23, 23, 23)
                                         .addComponent(jButton3))
                                     .addComponent(jLabel16))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(49, 49, 49)
+                                                .addComponent(Repairbox, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(53, 53, 53)
+                                                .addComponent(salesbox, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(meachnicbox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(costbox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(namebox, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(cidbox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -348,21 +345,25 @@ public class Repair extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(sj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel15))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(sstate)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(namebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cidbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(namebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(cidbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(14, 14, 14)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(meachnicbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -370,7 +371,7 @@ public class Repair extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(costbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -381,15 +382,17 @@ public class Repair extends javax.swing.JInternalFrame {
                             .addComponent(jLabel12)
                             .addComponent(sid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(sc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(sm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(sc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel13)
+                                    .addComponent(sm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(32, 32, 32)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,38 +431,28 @@ public class Repair extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_meachnicboxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String RpID = Repairbox.getText();
-        String Name = namebox.getText();
-        String Cid = cidbox.getText();
-        String mid = meachnicbox.getText();
-        String cost = costbox.getText();
-        String sales = salesbox.getText();
-        String state = statebox.getSelectedItem().toString();
-        String stdate = sdatebox.getText();
-        String eddate = edatebox.getText();
-
-        StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO repairjobs(rj_id,rj_job_name,customer,e_id,cost,sales,status,s_date,e_date) values('");
-        sql.append(RpID).append("','");
-        sql.append(Name).append("','");
-        sql.append(Cid).append("','");
-        sql.append(mid).append("','");
-        sql.append(cost).append("','");
-        sql.append(sales).append("','");
-        sql.append(state).append("','");
-        sql.append(stdate).append("','");
-        sql.append(eddate).append("')");
-
-        // TODO add your handli;ng code here:
-        try {
-            pstmt = conn.prepareStatement(sql.toString());
-            pstmt.execute();
-            tableload();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-
-
+       try {
+         StringBuilder sql = new StringBuilder();  
+        sql.append("INSERT INTO repairjobs(rj_id,rj_job_name,customer,e_id,cost,sales,status,s_date,e_date) ");
+        sql.append("values(?,?,?,?,?,?,?,?,?)");
+         
+         pstmt= conn.prepareStatement(sql.toString());
+         pstmt.setString(1,Repairbox.getText());
+         pstmt.setString(2,namebox.getText());
+         pstmt.setString(3,cidbox.getText());
+         pstmt.setString(4,meachnicbox.getText());
+         pstmt.setString(5,costbox.getText());
+         pstmt.setString(6,salesbox.getText());
+         pstmt.setString(7,statebox.getSelectedItem().toString());
+         pstmt.setString(8,sdatebox.getText());
+         pstmt.setString(9,edatebox.getText());
+         pstmt.executeUpdate();
+         JOptionPane.showMessageDialog(null,"added successfully");
+         tableload();
+     }
+     catch(Exception ex){
+         JOptionPane.showMessageDialog(null,ex);
+     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void stateboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stateboxActionPerformed
@@ -493,40 +486,29 @@ public class Repair extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        int b = JOptionPane.showConfirmDialog(null, "Are you sure?");
-
-        if (b == 0) {
-            String RpID = Repairbox.getText();
-            String Name = namebox.getText();
-            String Cid = cidbox.getText();
-            String mid = meachnicbox.getText();
-            String cost = costbox.getText();
-            String sales = salesbox.getText();
-            String state = statebox.getSelectedItem().toString();
-            String stdate = sdatebox.getText();
-            String eddate = sdatebox.getText();
-
-            StringBuilder sql2 = new StringBuilder();
-
-            sql2.append("UPDATE repairjobs SET rj_job_name='").append(Name);
-            sql2.append("',customer='").append(Cid);
-            sql2.append("',e_id='").append(mid);
-            sql2.append("',cost='").append(cost);
-            sql2.append("',sales='").append(sales);
-            sql2.append("',status='").append(state);
-            sql2.append("',s_date='").append(stdate);
-            sql2.append("',e_date='").append(eddate);
-            sql2.append("' WHERE rj_id='").append(RpID).append("'");
-
-            try {
-                pstmt = conn.prepareStatement(sql2.toString());
-                pstmt.execute();
-                tableload();
-                emailDetails();
-            } catch (Exception e) {
-            }
-        }         // TODO add your handling code here:
+try {
+    StringBuilder sql = new StringBuilder();  
+          sql.append("UPDATE repairjobs SET rj_job_name=?,customer=?,e_id=?,cost=?,sales=?,status=?,s_date=?,e_date=? ");
+          sql.append("WHERE rj_id=?");
+         
+         pstmt= conn.prepareStatement(sql.toString());
+         pstmt.setString(1,namebox.getText());
+         pstmt.setString(2,cidbox.getText());
+         pstmt.setString(3,meachnicbox.getText());
+         pstmt.setString(4,costbox.getText());
+         pstmt.setString(5,salesbox.getText());
+         pstmt.setString(6,statebox.getSelectedItem().toString());
+         pstmt.setString(7,sdatebox.getText());
+         pstmt.setString(8,edatebox.getText());
+         pstmt.setString(9,Repairbox.getText());
+         pstmt.executeUpdate();
+         JOptionPane.showMessageDialog(null,"updated successfully");
+         tableload();
+     }
+     catch(HeadlessException | SQLException ex){
+         JOptionPane.showMessageDialog(null,ex);
+     }        
+              // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -604,14 +586,6 @@ public class Repair extends javax.swing.JInternalFrame {
             }
         }// TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void nameboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameboxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameboxActionPerformed
-
-    private void sdateboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sdateboxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sdateboxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

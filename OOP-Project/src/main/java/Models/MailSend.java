@@ -77,7 +77,7 @@ public class MailSend {
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject("Stocks have depleted");
-            message.setText("Dear "+name+"\n"+"Our shop's requests you to bring order of "+supply+" since it has depleted");
+            message.setText("Dear "+name+"\n"+"Our shop Rusty Repaire requests you to bring order of "+supply+" since it has depleted");
             Transport.send(message);
             System.out.println("Sent message sucessfully....");
         } catch (Exception e) {

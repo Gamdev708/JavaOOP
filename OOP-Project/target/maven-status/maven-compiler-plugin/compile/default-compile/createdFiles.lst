@@ -3,7 +3,6 @@ FrontEnd\Repair$2.class
 FrontEnd\Report.class
 FrontEnd\SpareParts$4.class
 FrontEnd\Employee$2.class
-FrontEnd\ForgetPassword.class
 FrontEnd\PartsSupplier$4.class
 FrontEnd\AdMainMenu$6.class
 FrontEnd\Restore$2.class
@@ -20,7 +19,6 @@ FrontEnd\Employee$5.class
 DatabaseLayer\Database.class
 FrontEnd\Customer$6.class
 FrontEnd\SpareParts$1.class
-Models\function.class
 FrontEnd\Employee$1.class
 FrontEnd\SpareParts$5.class
 FrontEnd\Customer$8.class
@@ -31,7 +29,9 @@ FrontEnd\Employee$8.class
 Models\DBConnect.class
 FrontEnd\Customer$5.class
 FrontEnd\AdMainMenu$7.class
+Models\MailSend$2.class
 FrontEnd\Employee$4.class
+FrontEnd\EmpMainMenu$4.class
 FrontEnd\Report$1.class
 FrontEnd\Login$1.class
 FrontEnd\PartsSupplier$3.class
@@ -40,22 +40,18 @@ FrontEnd\AdMainMenu$1.class
 FrontEnd\Restore$7.class
 FrontEnd\SpareParts$2.class
 FrontEnd\Customer.class
-FrontEnd\Repair$11.class
 FrontEnd\EmpMainMenu$1.class
 FrontEnd\Restore$4.class
 FrontEnd\Customer$2.class
 FrontEnd\PartsSupplier$6.class
 DatabaseLayer\function.class
 FrontEnd\Employee$7.class
-Models\Database.class
 FrontEnd\AdMainMenu$4.class
 FrontEnd\Repair$4.class
 FrontEnd\Customer$4.class
 FrontEnd\PartsSupplier.class
 FrontEnd\PartsSupplier$2.class
-FrontEnd\Repair$10.class
 FrontEnd\AdMainMenu$8.class
-FrontEnd\ForgetPassword$2.class
 FrontEnd\Repair$7.class
 FrontEnd\EmpMainMenu$2.class
 FrontEnd\SpareParts$6.class
@@ -65,7 +61,6 @@ Models\MailSend$1.class
 FrontEnd\Login$2.class
 FrontEnd\Restore$8.class
 FrontEnd\Restore$3.class
-FrontEnd\ForgetPassword$1.class
 FrontEnd\AdMainMenu$5.class
 FrontEnd\Customer$1.class
 FrontEnd\PartsSupplier$5.class
@@ -81,10 +76,8 @@ FrontEnd\SpareParts$3.class
 FrontEnd\EmpMainMenu$3.class
 FrontEnd\Repair.class
 FrontEnd\Employee$9.class
-FrontEnd\Login$3.class
 Models\MailSend.class
 FrontEnd\Customer$7.class
 FrontEnd\Employee$6.class
 FrontEnd\Employee.class
 FrontEnd\PartsSupplier$1.class
-Models\Employer.class

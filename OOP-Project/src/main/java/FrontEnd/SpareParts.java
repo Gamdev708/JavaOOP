@@ -16,7 +16,7 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author M.S.Y.P.Sennayake
+ * @author M.S.Y.P.Sennayake & S.D.P.M.Siriwaradana
  */
 public class SpareParts extends javax.swing.JInternalFrame {
 
@@ -40,7 +40,6 @@ public class SpareParts extends javax.swing.JInternalFrame {
         sql.append("SELECT supplier.email,supplier.sup_name,spareparts.partname FROM spareparts,supplier ");
         sql.append("WHERE spareparts.supplierid=supplier.psid AND spareparts.quantity=");
         sql.append(word).append("");
-        System.out.println(sql);
         try {
             pstmt = conn.prepareStatement(sql.toString());
             rs = pstmt.executeQuery();
@@ -353,6 +352,7 @@ public class SpareParts extends javax.swing.JInternalFrame {
                 pstmt = conn.prepareStatement(sql2.toString());
                 pstmt.execute();
                 tableload();
+                emailDetails();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
