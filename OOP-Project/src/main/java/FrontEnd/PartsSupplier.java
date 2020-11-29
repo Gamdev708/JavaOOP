@@ -14,7 +14,7 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author S.D.P.M.Siriwaradana
+ * @author Kavidu Dinesh & S.D.P.M.Siriwaradana
  */
 public class PartsSupplier extends javax.swing.JInternalFrame {
 
@@ -276,24 +276,20 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String spid = supbox.getText();
-        String name = namebox.getText();
-        String Adres = adresbox1.getText();
-        String Tel = telbox.getText();
-        String Email = emailbox.getText();
-
         StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO supplier (psid,sup_name,tele,address,email) values('");
-        sql.append(spid).append("','");
-        sql.append(name).append("','");
-        sql.append(Tel).append("','");
-        sql.append(Adres).append("','");
-        sql.append(Email).append("')");
+        sql.append("INSERT INTO supplier (psid,sup_name,tele,address,email)VALUES(?,?,?,?,?)");
 
         // TODO add your handli;ng code here:
         try {
             pstmt = conn.prepareStatement(sql.toString());
-            pstmt.execute();
+            pstmt.setString(1, supbox.getText());
+            pstmt.setString(2, namebox.getText());
+            pstmt.setString(3, telbox.getText());
+            pstmt.setString(4, adresbox1.getText());
+            pstmt.setString(5, emailbox.getText());
+
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "part ADD");
             tableload();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -340,24 +336,20 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
         int x = JOptionPane.showConfirmDialog(null, "Are you sure?");
 
         if (x == 0) {
-            String spid = supbox.getText();
-            String name = namebox.getText();
-            String Adres = adresbox1.getText();
-            String Tel = telbox.getText();
-            String Email = emailbox.getText();
-
             StringBuilder sql2 = new StringBuilder();
-
-            sql2.append("UPDATE supplier SET sup_name='").append(name);
-            sql2.append("',tele='").append(Tel);
-            sql2.append("',address='").append(Adres);
-            sql2.append("',address='").append(Adres);
-            sql2.append("' WHERE psid='");
-            sql2.append(spid).append("'");
+            sql2.append("UPDATE supplier SET sup_name =?,tele=?,address=?,email=?");
+            sql2.append(" WHERE psid=?");
 
             try {
                 pstmt = conn.prepareStatement(sql2.toString());
-                pstmt.execute();
+                System.out.println(sql2.toString());
+                pstmt.setString(1, namebox.getText());
+                pstmt.setString(2, telbox.getText());
+                pstmt.setString(3, adresbox1.getText());
+                pstmt.setString(4, emailbox.getText());
+                pstmt.setString(5, supbox.getText());
+                pstmt.executeUpdate();
+                JOptionPane.showMessageDialog(rootPane, "part UPDATE");
                 tableload();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
@@ -371,12 +363,13 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
             int y = JOptionPane.showConfirmDialog(null, "Are you sure?");
             if (y == 0) {
 
-                String SPID = supbox.getText();
+                String sql = "DELETE FROM supplier WHERE psid=?";
 
-                String sql = "DELETE FROM supplier WHERE psid='" + SPID + "'";
                 try {
                     pstmt = conn.prepareStatement(sql);
-                    pstmt.execute();
+                    pstmt.setString(1, supbox.getText());
+                    pstmt.executeUpdate();
+                    JOptionPane.showMessageDialog(rootPane, "part REMOVED");
                     tableload();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
@@ -392,8 +385,8 @@ public class PartsSupplier extends javax.swing.JInternalFrame {
         int er = jTable1.getSelectedRow();
         String sid = jTable1.getValueAt(er, 0).toString();
         String name = jTable1.getValueAt(er, 1).toString();
-        String Adress = jTable1.getValueAt(er, 2).toString();
-        String telephone = jTable1.getValueAt(er, 3).toString();
+        String telephone = jTable1.getValueAt(er, 2).toString();
+        String Adress = jTable1.getValueAt(er, 3).toString();        
         String email = jTable1.getValueAt(er, 4).toString();
 
         supbox.setText(sid);
