@@ -38,8 +38,8 @@ public class Restore extends javax.swing.JInternalFrame {
 
         StringBuilder sql = new StringBuilder();
         String word = "Completed";
-        sql.append("SELECT customer.email,customer.cus_name FROM customer,repairjobs ");
-        sql.append("WHERE repairjobs.customer=customer.nic AND repairjobs.status='");
+        sql.append("SELECT customer.email,customer.cus_name FROM customer,vehicalrestore ");
+        sql.append("WHERE vehicalrestore.customer=customer.nic AND vehicalrestore.status='");
         sql.append(word).append("'");
         System.out.println(sql);
         try {
