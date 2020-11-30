@@ -504,6 +504,7 @@ try {
          pstmt.executeUpdate();
          JOptionPane.showMessageDialog(null,"updated successfully");
          tableload();
+         emailDetails();
      }
      catch(HeadlessException | SQLException ex){
          JOptionPane.showMessageDialog(null,ex);
